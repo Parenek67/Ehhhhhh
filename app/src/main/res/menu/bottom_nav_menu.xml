@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/dictionariesFragment"
+        android:icon="@drawable/ic_book"
+        android:title="Словари"/>
+    <item
+        android:id="@+id/trainingFragment"
+        android:icon="@drawable/ic_lesson"
+        android:title="Тренировка"/>
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_account"
+        android:title="Профиль"/>
+</menu>
