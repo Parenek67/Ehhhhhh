@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/dictionariesFragment"
-        android:name="com.example.ehhhhhh.DictsFragment"
+        android:name="com.example.ehhhhhh.presentation.fragments.DictsFragment"
         android:label="Словари"
         tools:layout="@layout/fragment_dictionaries" />
     <fragment
         android:id="@+id/trainingFragment"
-        android:name="com.example.ehhhhhh.TrainingFragment"
+        android:name="com.example.ehhhhhh.presentation.fragments.TrainingFragment"
         android:label="Тренировка"
         tools:layout="@layout/fragment_training" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.ehhhhhh.ProfileFragment"
+        android:name="com.example.ehhhhhh.presentation.fragments.ProfileFragment"
         android:label="Профиль"
         tools:layout="@layout/fragment_profile" />
 </navigation>

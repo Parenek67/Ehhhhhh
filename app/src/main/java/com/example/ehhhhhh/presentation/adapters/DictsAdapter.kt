@@ -1,10 +1,11 @@
-package com.example.ehhhhhh
+package com.example.ehhhhhh.presentation.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ehhhhhh.R
+import com.example.ehhhhhh.data.model.Dictionary
 import com.example.ehhhhhh.databinding.DictsItemBinding
 
 class DictsAdapter(val dicts: MutableList<Dictionary>):
