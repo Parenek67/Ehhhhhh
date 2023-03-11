@@ -19,6 +19,8 @@ import com.example.ehhhhhh.databinding.FragmentDictionariesBinding
 import com.example.ehhhhhh.presentation.adapters.DictsAdapter
 import com.example.ehhhhhh.presentation.viewmodel.DictViewModelFactory
 import com.example.ehhhhhh.presentation.viewmodel.DictionaryViewModel
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class DictsFragment : Fragment() {
 
@@ -39,7 +41,7 @@ class DictsFragment : Fragment() {
     ): View {
         _binding = FragmentDictionariesBinding.inflate(inflater, container, false)
         val view = binding.root
-        adapter = DictsAdapter(dicts)
+        adapter = DictsAdapter(dicts, requireContext())
         binding.recyclerDictionaries.adapter=adapter
         binding.recyclerDictionaries.layoutManager = LinearLayoutManager(context)
         dictViewModel = ViewModelProvider(this, DictViewModelFactory(requireContext()))
@@ -71,7 +73,8 @@ class DictsFragment : Fragment() {
 
         dialogBuilder.setPositiveButton("OK", DialogInterface.OnClickListener{ _, _ ->
             Log.d("${name.text}", "aaaa")
-            val d = Dictionary(0, "${name.text}", 0, "${desc.text}", "", false)
+            val date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM-dd-yyyy, HH:mm"))
+            val d = Dictionary(0, "${name.text}", 0, "${desc.text}", date, false)
             dictViewModel.insertDict(d)
         })
         dialogBuilder.setNegativeButton("Отмена", DialogInterface.OnClickListener{ dialog, _ ->

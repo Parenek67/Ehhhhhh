@@ -3,7 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
+    android:padding="10dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:background="@drawable/rectangle"
+    android:foreground="?android:attr/selectableItemBackground"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
@@ -36,5 +41,27 @@
         app:layout_constraintBottom_toTopOf="@id/dicts_item_words"
         app:layout_constraintEnd_toEndOf="parent"
         android:src="@drawable/favorite_border"/>
+
+    <TextView
+        android:id="@+id/dicts_item_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/dicts_item_words"
+        app:layout_constraintTop_toBottomOf="@id/dicts_item_words"
+        android:paddingTop="5dp"
+        android:text="Описание"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/dicts_item_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:paddingTop="5dp"
+        app:layout_constraintStart_toStartOf="@id/dicts_item_desc"
+        app:layout_constraintTop_toBottomOf="@id/dicts_item_desc"
+        android:text="Дата изменения:"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
