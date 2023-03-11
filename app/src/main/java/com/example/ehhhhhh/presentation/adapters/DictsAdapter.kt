@@ -8,7 +8,7 @@ import com.example.ehhhhhh.R
 import com.example.ehhhhhh.data.model.Dictionary
 import com.example.ehhhhhh.databinding.DictsItemBinding
 
-class DictsAdapter(val dicts: MutableList<Dictionary>):
+class DictsAdapter(var dicts: MutableList<Dictionary>):
     RecyclerView.Adapter<DictsAdapter.DictsViewHolder>() {
 
     inner class DictsViewHolder(val binding: DictsItemBinding): RecyclerView.ViewHolder(binding.root)
@@ -31,4 +31,13 @@ class DictsAdapter(val dicts: MutableList<Dictionary>):
     }
 
     override fun getItemCount() = dicts.size
+
+    fun setData(newList: MutableList<Dictionary>){
+        dicts = newList
+        notifyDataSetChanged()
+    }
+
+    fun getDict(position: Int): Dictionary{
+        return dicts[position]
+    }
 }

@@ -1,24 +1,36 @@
 package com.example.ehhhhhh.presentation.fragments
 
+import android.content.DialogInterface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ehhhhhh.presentation.adapters.DictsAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.example.ehhhhhh.R
 import com.example.ehhhhhh.data.model.Dictionary
 import com.example.ehhhhhh.databinding.FragmentDictionariesBinding
+import com.example.ehhhhhh.presentation.adapters.DictsAdapter
+import com.example.ehhhhhh.presentation.viewmodel.DictViewModelFactory
+import com.example.ehhhhhh.presentation.viewmodel.DictionaryViewModel
 
 class DictsFragment : Fragment() {
 
     private var _binding: FragmentDictionariesBinding? = null
     private val binding get() = _binding!!
     val dicts = mutableListOf(
-        Dictionary("Животные",44, true),
-        Dictionary("Растения",15, false),
-        Dictionary("IT",50, false),
+        Dictionary(0,"Животные",44, "","",true),
+        Dictionary(0,"Растения",15, "","",false),
+        Dictionary(0,"IT",50, "","",false),
     )
+    private lateinit var dictViewModel: DictionaryViewModel
+    private lateinit var adapter: DictsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,15 +39,64 @@ class DictsFragment : Fragment() {
     ): View {
         _binding = FragmentDictionariesBinding.inflate(inflater, container, false)
         val view = binding.root
-        val adapter = DictsAdapter(dicts)
+        adapter = DictsAdapter(dicts)
         binding.recyclerDictionaries.adapter=adapter
         binding.recyclerDictionaries.layoutManager = LinearLayoutManager(context)
+        dictViewModel = ViewModelProvider(this, DictViewModelFactory(requireContext()))
+            .get(DictionaryViewModel::class.java)
+
+        dictViewModel.getAllDicts().observe(viewLifecycleOwner) {
+            adapter.setData(it)
+        }
+
+        binding.dictsFab.setOnClickListener {
+            addDictDialog()
+        }
+        setItemTouchHelper()
         return view
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun addDictDialog(){
+        val dialogBuilder = context?.let { AlertDialog.Builder(it) }
+        val view = layoutInflater.inflate(R.layout.add_dict_dialog, null)
+        dialogBuilder!!.setView(view)
+
+        val name = view.findViewById<EditText>(R.id.addDD_name)
+        val desc = view.findViewById<EditText>(R.id.addDD_desc)
+
+        dialogBuilder.setPositiveButton("OK", DialogInterface.OnClickListener{ _, _ ->
+            Log.d("${name.text}", "aaaa")
+            val d = Dictionary(0, "${name.text}", 0, "${desc.text}", "", false)
+            dictViewModel.insertDict(d)
+        })
+        dialogBuilder.setNegativeButton("Отмена", DialogInterface.OnClickListener{ dialog, _ ->
+            dialog.cancel()
+        })
+
+        dialogBuilder.create().show()
+    }
+
+    private fun setItemTouchHelper(){
+        ItemTouchHelper(object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT){
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                dictViewModel.deleteDict(adapter.getDict(viewHolder.adapterPosition))
+                Log.d("${viewHolder.adapterPosition}", "aaa")
+            }
+
+        }).attachToRecyclerView(binding.recyclerDictionaries)
     }
 
 }
