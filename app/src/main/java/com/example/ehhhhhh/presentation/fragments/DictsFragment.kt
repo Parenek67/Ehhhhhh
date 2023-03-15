@@ -26,11 +26,7 @@ class DictsFragment : Fragment() {
 
     private var _binding: FragmentDictionariesBinding? = null
     private val binding get() = _binding!!
-    val dicts = mutableListOf(
-        Dictionary(0,"Животные",44, "","",true),
-        Dictionary(0,"Растения",15, "","",false),
-        Dictionary(0,"IT",50, "","",false),
-    )
+    val dicts = mutableListOf<Dictionary>()
     private lateinit var dictViewModel: DictionaryViewModel
     private lateinit var adapter: DictsAdapter
 
@@ -74,7 +70,7 @@ class DictsFragment : Fragment() {
         dialogBuilder.setPositiveButton("OK", DialogInterface.OnClickListener{ _, _ ->
             Log.d("${name.text}", "aaaa")
             val date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM-dd-yyyy, HH:mm"))
-            val d = Dictionary(0, "${name.text}", 0, "${desc.text}", date, false)
+            val d = Dictionary("${name.text}", 0, "${desc.text}", date, false)
             dictViewModel.insertDict(d)
         })
         dialogBuilder.setNegativeButton("Отмена", DialogInterface.OnClickListener{ dialog, _ ->

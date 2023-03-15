@@ -1,7 +1,8 @@
 package com.example.ehhhhhh
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -20,5 +21,10 @@ class MainActivity : AppCompatActivity() {
             R.id.profileFragment))
         setupActionBarWithNavController(navController, appBarConfig)
         bottomNav.setupWithNavController(navController)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val controller = findNavController(R.id.nav_host_fragment)
+        return controller.navigateUp() || super.onSupportNavigateUp()
     }
 }

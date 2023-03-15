@@ -3,11 +3,13 @@ package com.example.ehhhhhh.presentation.adapters
 import android.annotation.SuppressLint
 import android.content.Context
 import android.opengl.Visibility
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ehhhhhh.R
 import com.example.ehhhhhh.data.model.Dictionary
@@ -15,6 +17,8 @@ import com.example.ehhhhhh.databinding.DictsItemBinding
 
 class DictsAdapter(var dicts: MutableList<Dictionary>, val context: Context):
     RecyclerView.Adapter<DictsAdapter.DictsViewHolder>() {
+
+    val bundle = Bundle()
 
     inner class DictsViewHolder(val binding: DictsItemBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -45,6 +49,10 @@ class DictsAdapter(var dicts: MutableList<Dictionary>, val context: Context):
                 holder.binding.dictsItemDate.visibility = View.GONE
             }
             true
+        }
+        holder.itemView.setOnClickListener{
+            bundle.putString("name", dicts[position].name)
+            Navigation.findNavController(it).navigate(R.id.action_dictionariesFragment_to_dictionaryFragment, bundle)
         }
     }
 
