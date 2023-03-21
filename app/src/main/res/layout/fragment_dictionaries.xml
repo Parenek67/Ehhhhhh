@@ -20,4 +20,16 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/thumbleweed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/thumbleweed"
+        android:visibility="gone"
+        android:layout_marginBottom="100dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

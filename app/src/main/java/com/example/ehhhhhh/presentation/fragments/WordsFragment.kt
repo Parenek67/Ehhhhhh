@@ -6,7 +6,9 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ehhhhhh.R
 import com.example.ehhhhhh.data.model.Word
 import com.example.ehhhhhh.databinding.FragmentWordsBinding
 import com.example.ehhhhhh.presentation.adapters.WordsAdapter
@@ -21,7 +23,7 @@ class WordsFragment : Fragment(){
     private var _binding: FragmentWordsBinding? = null
     private val binding get() = _binding!!
     private lateinit var wordsViewModel: WordsViewModel
-
+    val bundle = Bundle()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,12 +31,9 @@ class WordsFragment : Fragment(){
         _binding = FragmentWordsBinding.inflate(inflater, container, false)
         val view = binding.root
         val dictName = requireArguments().getString("name").toString()
-        Log.d("namee", dictName)
         (activity as AppCompatActivity).supportActionBar!!.title=dictName
 
-        val words = mutableListOf(Word(dictName,"Собака", "Dog", "[dog]", 0),
-            Word(dictName,"Кот", "Cat", "[сat]", 0),
-            Word(dictName,"Город", "Town", "[town]", 0))
+        val words = mutableListOf<Word>()
         val rvWords = binding.recyclerWords
         val adapter = WordsAdapter(words)
         rvWords.adapter = adapter
@@ -42,12 +41,14 @@ class WordsFragment : Fragment(){
 
         wordsViewModel = ViewModelProvider(this, WordsViewModelFactory(requireContext(), dictName))
             .get(WordsViewModel::class.java)
-        /*wordsViewModel.insertWord(words[0])
-        wordsViewModel.insertWord(words[1])
-        wordsViewModel.insertWord(words[2])*/
 
         wordsViewModel.getWordsFromDict().observe(viewLifecycleOwner) {
             adapter.setData(it)
+        }
+
+        binding.wordsFab.setOnClickListener{
+            bundle.putString("name", dictName)
+            Navigation.findNavController(it).navigate(R.id.action_dictionaryFragment_to_addWordFragment, bundle)
         }
 
         return view

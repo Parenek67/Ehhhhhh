@@ -1,6 +1,7 @@
 package com.example.ehhhhhh.presentation.fragments
 
 import android.content.DialogInterface
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -45,6 +46,8 @@ class DictsFragment : Fragment() {
 
         dictViewModel.getAllDicts().observe(viewLifecycleOwner) {
             adapter.setData(it)
+            if(adapter.itemCount == 0)
+                binding.thumbleweed.visibility = View.VISIBLE
         }
 
         binding.dictsFab.setOnClickListener {
@@ -97,5 +100,4 @@ class DictsFragment : Fragment() {
 
         }).attachToRecyclerView(binding.recyclerDictionaries)
     }
-
 }

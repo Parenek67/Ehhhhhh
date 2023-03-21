@@ -3,7 +3,6 @@ package com.example.ehhhhhh.presentation.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ehhhhhh.data.model.Dictionary
 import com.example.ehhhhhh.data.model.Word
 import com.example.ehhhhhh.databinding.WordsItemBinding
 

@@ -32,5 +32,13 @@
         <action
             android:id="@+id/action_dictionaryFragment_to_dictionariesFragment"
             app:destination="@id/dictionariesFragment" />
+        <action
+            android:id="@+id/action_dictionaryFragment_to_addWordFragment"
+            app:destination="@id/addWordFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addWordFragment"
+        android:name="com.example.ehhhhhh.presentation.fragments.AddWordFragment"
+        android:label="fragment_add_word"
+        tools:layout="@layout/fragment_add_word" />
 </navigation>
