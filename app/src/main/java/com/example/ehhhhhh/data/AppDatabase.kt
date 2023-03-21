@@ -11,6 +11,7 @@ import com.example.ehhhhhh.data.model.Word
 abstract class AppDatabase: RoomDatabase() {
 
     abstract fun dictionaryDao(): DictionaryDao
+    abstract fun wordsDao(): WordsDao
 
     companion object{
         @Volatile

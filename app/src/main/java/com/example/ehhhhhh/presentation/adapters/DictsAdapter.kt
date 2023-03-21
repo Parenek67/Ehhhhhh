@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.opengl.Visibility
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,6 +53,7 @@ class DictsAdapter(var dicts: MutableList<Dictionary>, val context: Context):
         }
         holder.itemView.setOnClickListener{
             bundle.putString("name", dicts[position].name)
+            Log.d("namee", dicts[position].name)
             Navigation.findNavController(it).navigate(R.id.action_dictionariesFragment_to_dictionaryFragment, bundle)
         }
     }
