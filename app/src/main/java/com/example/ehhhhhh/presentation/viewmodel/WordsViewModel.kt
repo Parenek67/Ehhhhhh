@@ -28,11 +28,17 @@ class WordsViewModel(context: Context, dictName: String): ViewModel() {
         }
     }
 
-    /*fun deleteWord(word: Word){
+    fun deleteWord(word: Word){
         viewModelScope.launch(Dispatchers.IO) {
-            wordsRep.delete(w)
+            wordsRep.delete(word)
         }
-    }*/
+    }
+
+    fun changeCount(dictName: String, count: Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            wordsRep.changeCount(dictName, count)
+        }
+    }
 
     fun getWordsFromDict() = allWords
 }

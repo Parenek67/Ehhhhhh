@@ -2,13 +2,11 @@ package com.example.ehhhhhh.presentation.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +14,8 @@ import com.example.ehhhhhh.R
 import com.example.ehhhhhh.data.model.Dictionary
 import com.example.ehhhhhh.databinding.DictsItemBinding
 
-class DictsAdapter(var dicts: MutableList<Dictionary>, val context: Context):
+class DictsAdapter(var dicts: MutableList<Dictionary>,
+                   val context: Context):
     RecyclerView.Adapter<DictsAdapter.DictsViewHolder>() {
 
     val bundle = Bundle()
@@ -31,7 +30,7 @@ class DictsAdapter(var dicts: MutableList<Dictionary>, val context: Context):
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: DictsViewHolder, position: Int) {
         holder.binding.dictsItemName.text=dicts[position].name
-        holder.binding.dictsItemWords.text=dicts[position].words.toString()+" слов"
+        holder.binding.dictsItemWords.text= "${dicts[position].words} слов"
         holder.binding.dictsItemDesc.text=dicts[position].description
         holder.binding.dictsItemDate.text="Последнее изменение: ${dicts[position].date}"
         if(dicts[position].isFavourite){

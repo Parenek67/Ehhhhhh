@@ -11,4 +11,12 @@ class WordsRepository(val wordsDao: WordsDao, dictName: String) {
     suspend fun insert(word: Word){
         wordsDao.insert(word)
     }
+
+    suspend fun delete(word: Word){
+        wordsDao.delete(word)
+    }
+
+    suspend fun changeCount(dictName: String, count: Int){
+        wordsDao.changeWordCount(dictName, count)
+    }
 }

@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ehhhhhh.R
+import com.example.ehhhhhh.data.model.Dictionary
 import com.example.ehhhhhh.data.model.Word
 import com.example.ehhhhhh.databinding.WordsItemBinding
 import java.util.*
@@ -48,7 +49,8 @@ class WordsAdapter(var words: MutableList<Word>, val c: Context): RecyclerView.A
                 if (it == TextToSpeech.SUCCESS){
                     tts.language = Locale.ENGLISH
                     tts.setSpeechRate(1.0f)
-                    tts.speak(holder.binding.wordTranslate.text.toString(), TextToSpeech.QUEUE_ADD, null, TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID)
+                    tts.speak(holder.binding.wordTranslate.text.toString(), TextToSpeech.QUEUE_ADD, null,
+                        TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID)
                 }
             }
         }
@@ -59,6 +61,10 @@ class WordsAdapter(var words: MutableList<Word>, val c: Context): RecyclerView.A
     fun setData(newList: MutableList<Word>){
         words = newList
         notifyDataSetChanged()
+    }
+
+    fun getWord(position: Int): Word {
+        return words[position]
     }
 
 }

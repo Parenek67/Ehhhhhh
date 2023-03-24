@@ -1,12 +1,15 @@
 package com.example.ehhhhhh.presentation.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.ehhhhhh.R
 import com.example.ehhhhhh.data.model.Word
 import com.example.ehhhhhh.databinding.FragmentAddWordBinding
@@ -37,6 +40,7 @@ class AddWordFragment : Fragment() {
             binding.addWordTranslate.text.toString(),
             binding.addWordTranscription.text.toString(), 0)
             wordsViewModel.insertWord(word)
+            wordsViewModel.changeCount(dictName, 1)
             bundle.putString("name", dictName)
             findNavController().navigate(R.id.action_addWordFragment_to_dictionaryFragment, bundle)
         }

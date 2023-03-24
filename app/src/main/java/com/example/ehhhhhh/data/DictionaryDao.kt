@@ -14,8 +14,6 @@ interface DictionaryDao {
     suspend fun update(dict: Dictionary)
     @Delete
     suspend fun delete(dict: Dictionary)
-
     @Query("SELECT * FROM dictionary")
     fun selectAllDicts(): LiveData<MutableList<Dictionary>>
-
 }

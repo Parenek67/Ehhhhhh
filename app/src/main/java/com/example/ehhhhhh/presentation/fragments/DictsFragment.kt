@@ -11,6 +11,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -38,11 +39,11 @@ class DictsFragment : Fragment() {
     ): View {
         _binding = FragmentDictionariesBinding.inflate(inflater, container, false)
         val view = binding.root
+        dictViewModel = ViewModelProvider(this, DictViewModelFactory(requireContext()))
+            .get(DictionaryViewModel::class.java)
         adapter = DictsAdapter(dicts, requireContext())
         binding.recyclerDictionaries.adapter=adapter
         binding.recyclerDictionaries.layoutManager = LinearLayoutManager(context)
-        dictViewModel = ViewModelProvider(this, DictViewModelFactory(requireContext()))
-            .get(DictionaryViewModel::class.java)
 
         dictViewModel.getAllDicts().observe(viewLifecycleOwner) {
             adapter.setData(it)

@@ -14,5 +14,4 @@ class DictionaryRepository(val dictDao: DictionaryDao) {
     suspend fun delete(dict: Dictionary){
         dictDao.delete(dict)
     }
-
 }

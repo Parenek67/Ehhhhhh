@@ -1,6 +1,7 @@
 package com.example.ehhhhhh.presentation.viewmodel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -9,12 +10,14 @@ import com.example.ehhhhhh.data.AppDatabase
 import com.example.ehhhhhh.data.model.Dictionary
 import com.example.ehhhhhh.data.repository.DictionaryRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class DictionaryViewModel(context: Context): ViewModel() {
 
     private val allDicts: LiveData<MutableList<Dictionary>>
     private val dictsRep: DictionaryRepository
+    private var wordCount = 0
 
     init {
         val dictDao = AppDatabase.getDatabase(context).dictionaryDao()
