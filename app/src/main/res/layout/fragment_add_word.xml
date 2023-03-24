@@ -1,14 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.fragments.AddWordFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/addWord_dict"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingStart="4dp"
+        android:layout_margin="10dp"
+        android:textSize="18dp"
+        android:hint="Словарь: "/>
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/addWord_orig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/addWord_dict"
+        app:layout_constraintStart_toStartOf="@id/addWord_dict"
+        android:hint="Слово на русском языке"
+       />
+    <EditText
+        android:id="@+id/addWord_translate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/addWord_orig"
+        app:layout_constraintStart_toStartOf="@id/addWord_orig"
+        app:layout_constraintEnd_toEndOf="@id/addWord_orig"
+        android:hint="Перевод"/>
+    <TextView
+        android:id="@+id/addWord_transcription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/addWord_translate"
+        app:layout_constraintStart_toStartOf="@id/addWord_translate"
+        android:paddingStart="4dp"
+        android:layout_marginTop="4dp"
+        android:textSize="18dp"
+        android:hint="Транскрипция"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addWord_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/done_outline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="15dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

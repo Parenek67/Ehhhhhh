@@ -1,6 +1,7 @@
 package com.example.ehhhhhh.presentation.fragments
 
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +17,7 @@ import com.example.ehhhhhh.presentation.viewmodel.DictViewModelFactory
 import com.example.ehhhhhh.presentation.viewmodel.DictionaryViewModel
 import com.example.ehhhhhh.presentation.viewmodel.WordsViewModel
 import com.example.ehhhhhh.presentation.viewmodel.WordsViewModelFactory
+import java.util.*
 
 
 class WordsFragment : Fragment(){
@@ -23,6 +25,7 @@ class WordsFragment : Fragment(){
     private var _binding: FragmentWordsBinding? = null
     private val binding get() = _binding!!
     private lateinit var wordsViewModel: WordsViewModel
+    private lateinit var tts: TextToSpeech
     val bundle = Bundle()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +38,8 @@ class WordsFragment : Fragment(){
 
         val words = mutableListOf<Word>()
         val rvWords = binding.recyclerWords
-        val adapter = WordsAdapter(words)
+
+        val adapter = WordsAdapter(words, requireContext())
         rvWords.adapter = adapter
         rvWords.layoutManager = LinearLayoutManager(context)
 

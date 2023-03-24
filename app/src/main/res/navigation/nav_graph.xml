@@ -40,5 +40,9 @@
         android:id="@+id/addWordFragment"
         android:name="com.example.ehhhhhh.presentation.fragments.AddWordFragment"
         android:label="fragment_add_word"
-        tools:layout="@layout/fragment_add_word" />
+        tools:layout="@layout/fragment_add_word" >
+        <action
+            android:id="@+id/action_addWordFragment_to_dictionaryFragment"
+            app:destination="@id/dictionaryFragment" />
+    </fragment>
 </navigation>
