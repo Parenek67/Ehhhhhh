@@ -12,9 +12,17 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ehhhhhh.R
 import com.example.ehhhhhh.data.model.Word
+import com.example.ehhhhhh.data.repository.YDictRepository
 import com.example.ehhhhhh.databinding.FragmentAddWordBinding
 import com.example.ehhhhhh.presentation.viewmodel.WordsViewModel
 import com.example.ehhhhhh.presentation.viewmodel.WordsViewModelFactory
+import com.example.ehhhhhh.presentation.viewmodel.YDictViewModel
+import com.example.ehhhhhh.presentation.viewmodel.YDictViewModelFactory
+import com.google.mlkit.common.model.DownloadConditions
+import com.google.mlkit.nl.translate.TranslateLanguage
+import com.google.mlkit.nl.translate.Translation
+import com.google.mlkit.nl.translate.Translator
+import com.google.mlkit.nl.translate.TranslatorOptions
 
 class AddWordFragment : Fragment() {
 
@@ -22,17 +30,34 @@ class AddWordFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var wordsViewModel: WordsViewModel
     val bundle = Bundle()
-
+    //////
+    private lateinit var translator: Translator
+    private var bool = false
+    val options = TranslatorOptions.Builder()
+        .setSourceLanguage(TranslateLanguage.RUSSIAN)
+        .setTargetLanguage(TranslateLanguage.ENGLISH)
+        .build()
+    var conditions = DownloadConditions.Builder()
+        .requireWifi()
+        .build()
+    private lateinit var viewModel: YDictViewModel
+    val repository = YDictRepository()
+    private val key = "dict.1.1.20230331T191958Z.4928d8dc763a4001.141ac10c39fef65bc7b8d3509022e2e7eaa148e0"
+    /////
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAddWordBinding.inflate(inflater, container, false)
         val view = binding.root
+        translator = Translation.getClient(options)
         val dictName = requireArguments().getString("name").toString()
         binding.addWordDict.text = dictName
+
         wordsViewModel = ViewModelProvider(this, WordsViewModelFactory(requireContext(), dictName))
             .get(WordsViewModel::class.java)
+        viewModel = ViewModelProvider(this, YDictViewModelFactory(repository))
+            .get(YDictViewModel::class.java)
 
         binding.addWordFab.setOnClickListener{
             val word = Word(dictName,
@@ -45,11 +70,56 @@ class AddWordFragment : Fragment() {
             findNavController().navigate(R.id.action_addWordFragment_to_dictionaryFragment, bundle)
         }
 
+        binding.addWordTranslateBtn.setOnClickListener{
+            translate()
+        }
+
         return view
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun translate(){
+        translator.downloadModelIfNeeded(conditions)
+            .addOnSuccessListener {
+                bool = true
+                translator.translate(binding.addWordOrig.text.toString())
+                    .addOnSuccessListener { translatedText ->
+                        if(translatedText.contains("the ")) {
+                            binding.addWordTranslate.text = translatedText.split(" ")[1]
+                            ydict(translatedText.split(" ")[1])
+                        }
+                        else ydict(translatedText)
+                    }
+                    .addOnFailureListener { exception ->
+                        binding.addWordTranslate.text = exception.message
+                    }
+            }
+            .addOnFailureListener { exception ->
+                bool = false
+            }
+    }
+
+    private fun ydict(translate: String){
+        viewModel.getWord(key, "en-en", translate)
+        viewModel.response.observe(viewLifecycleOwner) {
+            if(it.isSuccessful) {
+                Log.d("dictt", "ок")
+                Log.d("dictt", "слово ${it.body()!!.def[0].text}")
+                Log.d("dictt", "транскрипция ${it.body()!!.def[0].ts}")
+                Log.d("dictt", "другой перевод ${it.body()!!.def[0].tr[0].text}")
+                Log.d("dictt", "синоним ${it.body()!!.def[0].tr[0].syn[0].text}")
+                binding.addWordTranslate.text = it.body()!!.def[0].text
+                binding.addWordTranscription.text = it.body()!!.def[0].ts
+                binding.addWordAlter.text = it.body()!!.def[0].tr[0].text
+                binding.addWordSyn.text = it.body()!!.def[0].tr[0].syn[0].text
+            }
+            else{
+                Log.d("dictt", "ошибка")
+            }
+        }
     }
 }

@@ -24,16 +24,20 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/addWord_dict"
         app:layout_constraintStart_toStartOf="@id/addWord_dict"
-        android:hint="Слово на русском языке"
-       />
-    <EditText
+        android:hint="Слово на русском языке"/>
+
+    <TextView
         android:id="@+id/addWord_translate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/addWord_orig"
         app:layout_constraintStart_toStartOf="@id/addWord_orig"
         app:layout_constraintEnd_toEndOf="@id/addWord_orig"
+        android:paddingStart="4dp"
+        android:layout_marginTop="4dp"
+        android:textSize="18dp"
         android:hint="Перевод"/>
+
     <TextView
         android:id="@+id/addWord_transcription"
         android:layout_width="wrap_content"
@@ -44,6 +48,38 @@
         android:layout_marginTop="4dp"
         android:textSize="18dp"
         android:hint="Транскрипция"/>
+
+    <TextView
+        android:id="@+id/addWord_alter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="4dp"
+        android:text="Альтернативный перевод:"
+        android:textSize="18dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/addWord_transcription"
+        app:layout_constraintStart_toStartOf="@id/addWord_transcription"/>
+
+    <TextView
+        android:id="@+id/addWord_syn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="4dp"
+        android:text="Синоним:"
+        android:textSize="18dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/addWord_alter"
+        app:layout_constraintStart_toStartOf="@id/addWord_alter"/>
+
+    <ImageView
+        android:id="@+id/addWord_translateBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/addWord_orig"
+        app:layout_constraintTop_toTopOf="@id/addWord_orig"
+        app:layout_constraintBottom_toBottomOf="@id/addWord_orig"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_translate"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addWord_fab"
