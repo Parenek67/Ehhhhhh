@@ -52,7 +52,7 @@ class AddWordFragment : Fragment() {
         val view = binding.root
         translator = Translation.getClient(options)
         val dictName = requireArguments().getString("name").toString()
-        binding.addWordDict.text = dictName
+        //binding.addWordDict.text = dictName
 
         wordsViewModel = ViewModelProvider(this, WordsViewModelFactory(requireContext(), dictName))
             .get(WordsViewModel::class.java)
@@ -74,6 +74,24 @@ class AddWordFragment : Fragment() {
             translate()
         }
 
+        binding.autocomplete.setOnCheckedChangeListener{ buttonView, isChecked ->
+            if (isChecked){
+                binding.addWordTranslate.focusable = View.NOT_FOCUSABLE
+                binding.addWordTranscription.focusable = View.NOT_FOCUSABLE
+                binding.addWordAlternative.focusable = View.NOT_FOCUSABLE
+                binding.addWordSynonim.focusable = View.NOT_FOCUSABLE
+            }else{
+                binding.addWordTranslate.isFocusable = true
+                binding.addWordTranslate.isFocusableInTouchMode = true
+                binding.addWordTranscription.isFocusable = true
+                binding.addWordTranscription.isFocusableInTouchMode = true
+                binding.addWordAlternative.isFocusable = true
+                binding.addWordAlternative.isFocusableInTouchMode = true
+                binding.addWordSynonim.isFocusable = true
+                binding.addWordSynonim.isFocusableInTouchMode = true
+            }
+        }
+
         return view
     }
 
@@ -88,14 +106,15 @@ class AddWordFragment : Fragment() {
                 bool = true
                 translator.translate(binding.addWordOrig.text.toString())
                     .addOnSuccessListener { translatedText ->
+                        Log.d("dictt", translatedText)
                         if(translatedText.contains("the ")) {
-                            binding.addWordTranslate.text = translatedText.split(" ")[1]
+                            binding.addWordTranslate.setText(translatedText.split(" ")[0])
                             ydict(translatedText.split(" ")[1])
                         }
                         else ydict(translatedText)
                     }
                     .addOnFailureListener { exception ->
-                        binding.addWordTranslate.text = exception.message
+                        binding.addWordTranslate.setText(exception.message)
                     }
             }
             .addOnFailureListener { exception ->
@@ -111,11 +130,11 @@ class AddWordFragment : Fragment() {
                 Log.d("dictt", "слово ${it.body()!!.def[0].text}")
                 Log.d("dictt", "транскрипция ${it.body()!!.def[0].ts}")
                 Log.d("dictt", "другой перевод ${it.body()!!.def[0].tr[0].text}")
-                Log.d("dictt", "синоним ${it.body()!!.def[0].tr[0].syn[0].text}")
-                binding.addWordTranslate.text = it.body()!!.def[0].text
-                binding.addWordTranscription.text = it.body()!!.def[0].ts
-                binding.addWordAlter.text = it.body()!!.def[0].tr[0].text
-                binding.addWordSyn.text = it.body()!!.def[0].tr[0].syn[0].text
+                Log.d("dictt", "синоним ${it.body()?.def?.get(0)?.tr?.get(0)?.syn?.get(0)?.text ?: "null"}")
+                binding.addWordTranslate.setText(it.body()!!.def[0].text)
+                binding.addWordTranscription.setText(it.body()!!.def[0].ts)
+                binding.addWordAlternative.setText(it.body()!!.def[0].tr[0].text)
+                binding.addWordSynonim.setText(it.body()?.def?.get(0)?.tr?.get(0)?.syn?.get(0)?.text ?: "null")
             }
             else{
                 Log.d("dictt", "ошибка")
