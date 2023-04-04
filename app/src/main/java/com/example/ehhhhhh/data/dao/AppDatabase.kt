@@ -1,4 +1,4 @@
-package com.example.ehhhhhh.data
+package com.example.ehhhhhh.data.dao
 
 import android.content.Context
 import androidx.room.Database

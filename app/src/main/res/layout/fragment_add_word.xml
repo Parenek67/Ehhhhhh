@@ -44,15 +44,24 @@
         app:layout_constraintBottom_toBottomOf="@id/layout1"
         android:src="@drawable/ic_translate"/>
 
+    <TextView
+        android:id="@+id/annotation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Реализовано с помощью API Яндекс.Словарь"
+        android:textSize="15sp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="@id/layout1"
+        app:layout_constraintEnd_toEndOf="@id/layout1"
+        app:layout_constraintTop_toBottomOf="@id/autocomplete"/>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout2"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintStart_toStartOf="@id/layout1"
         app:layout_constraintEnd_toEndOf="@id/layout1"
-        app:layout_constraintTop_toBottomOf="@id/autocomplete"
+        app:layout_constraintTop_toBottomOf="@id/annotation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         app:endIconMode="clear_text">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/addWord_translate"
@@ -121,6 +130,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/done_outline"
+        app:rippleColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="15dp"/>

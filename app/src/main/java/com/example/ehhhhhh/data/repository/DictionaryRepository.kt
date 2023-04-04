@@ -1,6 +1,6 @@
 package com.example.ehhhhhh.data.repository
 
-import com.example.ehhhhhh.data.DictionaryDao
+import com.example.ehhhhhh.data.dao.DictionaryDao
 import com.example.ehhhhhh.data.model.Dictionary
 
 class DictionaryRepository(val dictDao: DictionaryDao) {

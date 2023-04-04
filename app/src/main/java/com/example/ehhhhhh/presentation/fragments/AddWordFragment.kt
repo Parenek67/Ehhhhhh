@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -53,7 +54,7 @@ class AddWordFragment : Fragment() {
         translator = Translation.getClient(options)
         val dictName = requireArguments().getString("name").toString()
         //binding.addWordDict.text = dictName
-
+        (activity as AppCompatActivity).supportActionBar!!.title=dictName
         wordsViewModel = ViewModelProvider(this, WordsViewModelFactory(requireContext(), dictName))
             .get(WordsViewModel::class.java)
         viewModel = ViewModelProvider(this, YDictViewModelFactory(repository))

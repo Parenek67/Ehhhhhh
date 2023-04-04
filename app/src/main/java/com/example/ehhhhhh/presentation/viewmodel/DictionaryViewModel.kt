@@ -1,16 +1,14 @@
 package com.example.ehhhhhh.presentation.viewmodel
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.ehhhhhh.data.AppDatabase
+import com.example.ehhhhhh.data.dao.AppDatabase
 import com.example.ehhhhhh.data.model.Dictionary
 import com.example.ehhhhhh.data.repository.DictionaryRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class DictionaryViewModel(context: Context): ViewModel() {

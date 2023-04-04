@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.ehhhhhh.data.AppDatabase
+import com.example.ehhhhhh.data.dao.AppDatabase
 import com.example.ehhhhhh.data.model.Word
 import com.example.ehhhhhh.data.repository.WordsRepository
 import kotlinx.coroutines.Dispatchers

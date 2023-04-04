@@ -1,7 +1,6 @@
 package com.example.ehhhhhh.data.repository
 
-import com.example.ehhhhhh.data.WordsDao
-import com.example.ehhhhhh.data.model.Dictionary
+import com.example.ehhhhhh.data.dao.WordsDao
 import com.example.ehhhhhh.data.model.Word
 
 class WordsRepository(val wordsDao: WordsDao, dictName: String) {
