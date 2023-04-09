@@ -5,28 +5,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
 import com.example.ehhhhhh.R
 import com.example.ehhhhhh.databinding.FragmentDictionariesBinding
+import com.example.ehhhhhh.databinding.FragmentFindTrainBinding
 import com.example.ehhhhhh.databinding.FragmentTrainingBinding
-import com.example.ehhhhhh.presentation.adapters.TrainListAdapter
 
-class TrainingFragment : Fragment() {
+class FindTrainFragment : Fragment() {
 
-    private var _binding: FragmentTrainingBinding? = null
+    private var _binding: FragmentFindTrainBinding? = null
     private val binding get() = _binding!!
-
+    val bundle = Bundle()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentTrainingBinding.inflate(inflater, container, false)
+        _binding = FragmentFindTrainBinding.inflate(inflater, container, false)
         val view = binding.root
+        val trainType = requireArguments().getString("train").toString()
+        (activity as AppCompatActivity).supportActionBar!!.title=trainType
 
-        val adapter = TrainListAdapter(mutableListOf("Поиск перевода", "Поиск слова",
-            "Написание слова по переводу", "Написание перевода по слову"))
-        binding.trainRv.adapter = adapter
-        binding.trainRv.layoutManager = LinearLayoutManager(context)
         return view
     }
 
@@ -34,4 +32,5 @@ class TrainingFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

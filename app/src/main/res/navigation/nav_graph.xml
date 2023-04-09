@@ -18,7 +18,11 @@
         android:id="@+id/trainingFragment"
         android:name="com.example.ehhhhhh.presentation.fragments.TrainingFragment"
         android:label="Тренировка"
-        tools:layout="@layout/fragment_training" />
+        tools:layout="@layout/fragment_training" >
+        <action
+            android:id="@+id/action_trainingFragment_to_findTrainFragment"
+            app:destination="@id/findTrainFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.ehhhhhh.presentation.fragments.ProfileFragment"
@@ -45,4 +49,9 @@
             android:id="@+id/action_addWordFragment_to_dictionaryFragment"
             app:destination="@id/dictionaryFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/findTrainFragment"
+        android:name="com.example.ehhhhhh.presentation.fragments.FindTrainFragment"
+        android:label="fragment_find_train"
+        tools:layout="@layout/fragment_find_train" />
 </navigation>
