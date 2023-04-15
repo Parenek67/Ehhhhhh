@@ -109,10 +109,13 @@ class AddWordFragment : Fragment() {
                     .addOnSuccessListener { translatedText ->
                         Log.d("dictt", translatedText)
                         if(translatedText.contains("the ")) {
-                            binding.addWordTranslate.setText(translatedText.split(" ")[0])
+                            binding.addWordTranslate.setText(translatedText.split(" ")[1])
                             ydict(translatedText.split(" ")[1])
                         }
-                        else ydict(translatedText)
+                        else {
+                            binding.addWordTranslate.setText(translatedText)
+                            ydict(translatedText)
+                        }
                     }
                     .addOnFailureListener { exception ->
                         binding.addWordTranslate.setText(exception.message)
@@ -128,13 +131,13 @@ class AddWordFragment : Fragment() {
         viewModel.response.observe(viewLifecycleOwner) {
             if(it.isSuccessful) {
                 Log.d("dictt", "ок")
-                Log.d("dictt", "слово ${it.body()!!.def[0].text}")
-                Log.d("dictt", "транскрипция ${it.body()!!.def[0].ts}")
-                Log.d("dictt", "другой перевод ${it.body()!!.def[0].tr[0].text}")
+                //Log.d("dictt", "слово ${it.body()!!.def[0].text}")
+                //Log.d("dictt", "транскрипция ${it.body()!!.def[0].ts}")
+                Log.d("dictt", "другой перевод ${it.body()?.def?.get(0)?.tr?.get(0)?.text ?: "null"}")
                 Log.d("dictt", "синоним ${it.body()?.def?.get(0)?.tr?.get(0)?.syn?.get(0)?.text ?: "null"}")
-                binding.addWordTranslate.setText(it.body()!!.def[0].text)
-                binding.addWordTranscription.setText(it.body()!!.def[0].ts)
-                binding.addWordAlternative.setText(it.body()!!.def[0].tr[0].text)
+                //binding.addWordTranslate.setText(it.body()?.def?.get(0)?.text ?: "null")
+                binding.addWordTranscription.setText(it.body()?.def?.get(0)?.ts ?: "null")
+                binding.addWordAlternative.setText(it.body()?.def?.get(0)?.tr?.get(0)?.text ?: "null")
                 binding.addWordSynonim.setText(it.body()?.def?.get(0)?.tr?.get(0)?.syn?.get(0)?.text ?: "null")
             }
             else{

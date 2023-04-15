@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="main_purple">#6750A4</color>
+    <color name="true_answer">#2cc910</color>
+    <color name="false_answer">#d93b0b</color>
 </resources>

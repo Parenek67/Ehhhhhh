@@ -1,6 +1,7 @@
 package com.example.ehhhhhh.presentation.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +25,8 @@ class TrainingFragment : Fragment() {
         val view = binding.root
 
         val adapter = TrainListAdapter(mutableListOf("Поиск перевода", "Поиск слова",
-            "Написание слова по переводу", "Написание перевода по слову"))
+            "Написание слова по переводу", "Написание перевода по слову"), binding.trainSelectedDict.text.toString())
+        Log.d("maptest", binding.trainSelectedDict.text.toString())
         binding.trainRv.adapter = adapter
         binding.trainRv.layoutManager = LinearLayoutManager(context)
         return view

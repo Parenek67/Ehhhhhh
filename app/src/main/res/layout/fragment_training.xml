@@ -44,7 +44,7 @@
             android:textSize="16sp"
             android:layout_marginTop="5dp"
             android:paddingBottom="5dp"
-            android:text="Словари не выбраны"/>
+            android:text="Животные"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/train_rv"

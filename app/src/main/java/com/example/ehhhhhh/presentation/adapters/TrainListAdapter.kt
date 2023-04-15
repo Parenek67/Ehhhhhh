@@ -1,6 +1,7 @@
 package com.example.ehhhhhh.presentation.adapters
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.NavController
@@ -9,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ehhhhhh.R
 import com.example.ehhhhhh.databinding.TrainItemBinding
 
-class TrainListAdapter(val trainList: MutableList<String>):
+class TrainListAdapter(val trainList: MutableList<String>, val dictName: String):
     RecyclerView.Adapter<TrainListAdapter.TrainListViewHolder>() {
 
     val bundle = Bundle()
@@ -25,8 +26,10 @@ class TrainListAdapter(val trainList: MutableList<String>):
         holder.binding.trainitemName.text = trainList[position]
         holder.binding.trainItemNext.setOnClickListener{
             bundle.putString("train", trainList[position])
+            bundle.putString("dictName", dictName)
+            Log.d("maptest", dictName)
             if(holder.binding.trainitemName.text.contains("Поиск"))
-            Navigation.findNavController(it).navigate(R.id.action_trainingFragment_to_findTrainFragment, bundle)
+                Navigation.findNavController(it).navigate(R.id.action_trainingFragment_to_findTrainFragment, bundle)
         }
     }
 
