@@ -16,4 +16,6 @@ interface WordsDao {
     fun getWordsFromDict(dict_name: String): LiveData<MutableList<Word>>
     @Query("UPDATE dictionary SET words = words + :count WHERE name = :dict_name")
     suspend fun changeWordCount(dict_name: String, count: Int)
+    @Query("SELECT name FROM dictionary")
+    fun getDictNames(): LiveData<MutableList<String>>
 }

@@ -15,11 +15,13 @@ class WordsViewModel(context: Context, dictName: String): ViewModel() {
 
     private val allWords: LiveData<MutableList<Word>>
     private val wordsRep: WordsRepository
+    private val dictNames: LiveData<MutableList<String>>
 
     init {
         val wordsDao = AppDatabase.getDatabase(context).wordsDao()
         wordsRep = WordsRepository(wordsDao, dictName)
         allWords = wordsRep.wordsFromDict
+        dictNames = wordsRep.dictNames
     }
 
     fun insertWord(word: Word){
