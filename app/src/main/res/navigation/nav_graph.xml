@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_trainingFragment_to_findTrainFragment"
             app:destination="@id/findTrainFragment" />
+        <action
+            android:id="@+id/action_trainingFragment_to_selectDictFragment"
+            app:destination="@id/selectDictFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -54,4 +57,13 @@
         android:name="com.example.ehhhhhh.presentation.fragments.FindTrainFragment"
         android:label="fragment_find_train"
         tools:layout="@layout/fragment_find_train" />
+    <fragment
+        android:id="@+id/selectDictFragment"
+        android:name="com.example.ehhhhhh.presentation.fragments.SelectDictFragment"
+        android:label="fragment_select_dict"
+        tools:layout="@layout/fragment_select_dict" >
+        <action
+            android:id="@+id/action_selectDictFragment_to_trainingFragment"
+            app:destination="@id/trainingFragment" />
+    </fragment>
 </navigation>

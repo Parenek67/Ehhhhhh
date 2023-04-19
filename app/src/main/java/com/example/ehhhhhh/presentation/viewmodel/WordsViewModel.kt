@@ -43,6 +43,8 @@ class WordsViewModel(context: Context, dictName: String): ViewModel() {
     }
 
     fun getWordsFromDict() = allWords
+
+    fun getDictNames() = dictNames
 }
 
 class WordsViewModelFactory(private val context: Context, val dictName: String) : ViewModelProvider.Factory {

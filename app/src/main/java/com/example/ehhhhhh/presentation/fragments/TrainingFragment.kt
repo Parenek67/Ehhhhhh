@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ehhhhhh.R
 import com.example.ehhhhhh.databinding.FragmentDictionariesBinding
@@ -24,11 +25,19 @@ class TrainingFragment : Fragment() {
         _binding = FragmentTrainingBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        binding.trainSelectedDict.text = arguments?.getString("names") ?: "Ничего не выбрано"
+
         val adapter = TrainListAdapter(mutableListOf("Поиск перевода", "Поиск слова",
-            "Написание слова по переводу", "Написание перевода по слову"), binding.trainSelectedDict.text.toString())
+            "Написание слова по переводу", "Написание перевода по слову"),
+            /*binding.trainSelectedDict.text.toString())*/ arguments?.getString("names") ?: "Ничего не выбрано")
+
         Log.d("maptest", binding.trainSelectedDict.text.toString())
         binding.trainRv.adapter = adapter
         binding.trainRv.layoutManager = LinearLayoutManager(context)
+
+        binding.trainCl.setOnClickListener{
+            findNavController().navigate(R.id.action_trainingFragment_to_selectDictFragment)
+        }
         return view
     }
 
