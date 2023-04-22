@@ -9,15 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.ehhhhhh.R
 import com.example.ehhhhhh.data.model.Word
 import com.example.ehhhhhh.databinding.FragmentFindTrainBinding
 import com.example.ehhhhhh.presentation.viewmodel.WordsViewModel
 import com.example.ehhhhhh.presentation.viewmodel.WordsViewModelFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class FindTrainFragment : Fragment() {
 
@@ -42,9 +40,13 @@ class FindTrainFragment : Fragment() {
         wordsViewModel = ViewModelProvider(this, WordsViewModelFactory(requireContext(), dictName))
             .get(WordsViewModel::class.java)
 
-        wordsViewModel.getWordsFromDict().observe(viewLifecycleOwner) {
+        /*wordsViewModel.getWordsFromDict().observe(viewLifecycleOwner) {
             train(it)
+        }*/
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            train(wordsViewModel.getWordsForTrain())
         }
+
         binding.answer1.setOnClickListener{
             if (trueAnswers.get(binding.findtrainQuestion.text) != binding.answer1.text){
                 Log.d("maptest", "false")

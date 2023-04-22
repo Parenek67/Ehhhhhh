@@ -1,6 +1,7 @@
 package com.example.ehhhhhh.presentation.viewmodel
 
 import android.content.Context
+import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -9,19 +10,19 @@ import com.example.ehhhhhh.data.dao.AppDatabase
 import com.example.ehhhhhh.data.model.Word
 import com.example.ehhhhhh.data.repository.WordsRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import java.util.logging.Level
 
-class WordsViewModel(context: Context, dictName: String): ViewModel() {
+class WordsViewModel(context: Context, val dictName: String): ViewModel() {
 
     private val allWords: LiveData<MutableList<Word>>
     private val wordsRep: WordsRepository
-    private val dictNames: LiveData<MutableList<String>>
 
     init {
         val wordsDao = AppDatabase.getDatabase(context).wordsDao()
         wordsRep = WordsRepository(wordsDao, dictName)
         allWords = wordsRep.wordsFromDict
-        dictNames = wordsRep.dictNames
     }
 
     fun insertWord(word: Word){
@@ -44,7 +45,25 @@ class WordsViewModel(context: Context, dictName: String): ViewModel() {
 
     fun getWordsFromDict() = allWords
 
-    fun getDictNames() = dictNames
+    suspend fun getDictNames(): MutableList<String> {
+        return wordsRep.getDictNames()
+    }
+
+    suspend fun getWordsByLevel(level: String): MutableList<Word>{
+        val res = viewModelScope.async(Dispatchers.IO) {
+            wordsRep.getWordsByLevel(level)
+        }
+        return res.await()
+    }
+
+    suspend fun getWordsForTrain(): MutableList<Word>{
+        if(dictName.isDigitsOnly()){
+            return getWordsByLevel(dictName)
+        }
+        else{
+            return wordsRep.getWordsForTrain(dictName)
+        }
+    }
 }
 
 class WordsViewModelFactory(private val context: Context, val dictName: String) : ViewModelProvider.Factory {

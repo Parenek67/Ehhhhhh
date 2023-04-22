@@ -24,6 +24,8 @@ import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.Translator
 import com.google.mlkit.nl.translate.TranslatorOptions
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class AddWordFragment : Fragment() {
 
@@ -64,7 +66,9 @@ class AddWordFragment : Fragment() {
             val word = Word(dictName,
             binding.addWordOrig.text.toString(),
             binding.addWordTranslate.text.toString(),
-            binding.addWordTranscription.text.toString(), 0)
+            binding.addWordTranscription.text.toString(), 0,
+            //LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE)
+            )
             wordsViewModel.insertWord(word)
             wordsViewModel.changeCount(dictName, 1)
             bundle.putString("name", dictName)

@@ -1,5 +1,6 @@
 package com.example.ehhhhhh.data.model
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.ForeignKey.Companion.CASCADE
@@ -15,5 +16,6 @@ data class Word(
     val orig_word: String,
     val translate: String,
     val transcription: String,
-    val level: Int
+    val level: Int,
+    //@ColumnInfo(name = "rep_date", defaultValue = "null" )val rep_date: String
 )

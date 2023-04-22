@@ -17,5 +17,10 @@ interface WordsDao {
     @Query("UPDATE dictionary SET words = words + :count WHERE name = :dict_name")
     suspend fun changeWordCount(dict_name: String, count: Int)
     @Query("SELECT name FROM dictionary")
-    fun getDictNames(): LiveData<MutableList<String>>
+    suspend fun getDictNames(): MutableList<String>
+    @Query("SELECT * FROM word WHERE level = :level LIMIT 30")
+    fun getWordsByLevel(level:  String): MutableList<Word>
+
+    @Query("SELECT * FROM word WHERE dict_name = :dict_name")
+    fun getWordsForTrain(dict_name: String): MutableList<Word>
 }
