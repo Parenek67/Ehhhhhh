@@ -17,5 +17,5 @@ data class Word(
     val translate: String,
     val transcription: String,
     val level: Int,
-    //@ColumnInfo(name = "rep_date", defaultValue = "null" )val rep_date: String
+    val rep_date: String
 )

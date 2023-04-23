@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.ehhhhhh.R
 import com.example.ehhhhhh.data.model.Word
 import com.example.ehhhhhh.databinding.FragmentFindTrainBinding
@@ -25,6 +27,8 @@ class FindTrainFragment : Fragment() {
     private lateinit var map: MutableMap<String, MutableList<String>>
     var count = 0
     val trueAnswers = mutableMapOf<String, String>()
+    var result = ""
+    val bundle = Bundle()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,10 +55,12 @@ class FindTrainFragment : Fragment() {
             if (trueAnswers.get(binding.findtrainQuestion.text) != binding.answer1.text){
                 Log.d("maptest", "false")
                 binding.answer1.setTextColor(getResources().getColor(R.color.false_answer))
+                result += "${binding.findtrainQuestion.text} ${trueAnswers.get(binding.findtrainQuestion.text)} 0; "
             }
             else {
                 Log.d("maptest", "true")
                 binding.answer1.setTextColor(getResources().getColor(R.color.true_answer))
+                result += "${binding.findtrainQuestion.text} ${trueAnswers.get(binding.findtrainQuestion.text)} 1; "
             }
             CoroutineScope(Dispatchers.Main).launch {
                 delay(1000)
@@ -67,10 +73,12 @@ class FindTrainFragment : Fragment() {
             if (trueAnswers.get(binding.findtrainQuestion.text) != binding.answer2.text){
                 Log.d("maptest", "false")
                 binding.answer2.setTextColor(getResources().getColor(R.color.false_answer))
+                result += "${binding.findtrainQuestion.text} ${trueAnswers.get(binding.findtrainQuestion.text)} 0; "
             }
             else {
                 Log.d("maptest", "true")
                 binding.answer2.setTextColor(getResources().getColor(R.color.true_answer))
+                result += "${binding.findtrainQuestion.text} ${trueAnswers.get(binding.findtrainQuestion.text)} 1; "
             }
             CoroutineScope(Dispatchers.Main).launch {
                 delay(1000)
@@ -81,12 +89,14 @@ class FindTrainFragment : Fragment() {
 
         binding.answer3.setOnClickListener{
             if (trueAnswers.get(binding.findtrainQuestion.text) != binding.answer3.text){
-                Log.d("maptest", "false")
                 binding.answer3.setTextColor(getResources().getColor(R.color.false_answer))
+                Log.d("maptest", "false")
+                result += "${binding.findtrainQuestion.text} ${trueAnswers.get(binding.findtrainQuestion.text)} 0; "
             }
             else {
-                Log.d("maptest", "true")
                 binding.answer3.setTextColor(getResources().getColor(R.color.true_answer))
+                result += "${binding.findtrainQuestion.text} ${trueAnswers.get(binding.findtrainQuestion.text)} 1; "
+                Log.d("maptest", "true")
             }
             CoroutineScope(Dispatchers.Main).launch {
                 delay(1000)
@@ -99,10 +109,12 @@ class FindTrainFragment : Fragment() {
             if (trueAnswers.get(binding.findtrainQuestion.text) != binding.answer4.text){
                 Log.d("maptest", "false")
                 binding.answer4.setTextColor(getResources().getColor(R.color.false_answer))
+                result += "${binding.findtrainQuestion.text} ${trueAnswers.get(binding.findtrainQuestion.text)} 0; "
             }
             else {
                 Log.d("maptest", "true")
                 binding.answer4.setTextColor(getResources().getColor(R.color.true_answer))
+                result += "${binding.findtrainQuestion.text} ${trueAnswers.get(binding.findtrainQuestion.text)} 1; "
             }
             CoroutineScope(Dispatchers.Main).launch {
                 delay(1000)
@@ -146,13 +158,20 @@ class FindTrainFragment : Fragment() {
     }
 
     fun question(){
-        binding.findtrainQuestion.text = map.keys.elementAt(count)
-        val a = map.get(map.keys.elementAt(count))?.shuffled()
-        binding.answer1.text = a?.get(0)
-        binding.answer2.text = a?.get(1)
-        binding.answer3.text = a?.get(2)
-        binding.answer4.text = a?.get(3)
-        count++
+        if(count < map.keys.size) {
+            binding.findtrainQuestion.text = map.keys.elementAt(count)
+            val a = map.get(map.keys.elementAt(count))?.shuffled()
+            binding.answer1.text = a?.get(0)
+            binding.answer2.text = a?.get(1)
+            binding.answer3.text = a?.get(2)
+            binding.answer4.text = a?.get(3)
+            count++
+        }
+        else{
+            //Log.d("maptest", result.dropLast(2))
+            bundle.putString("res", result.dropLast(2))
+            findNavController().navigate(R.id.action_findTrainFragment_to_trainResultFragment, bundle)
+        }
     }
 
 }

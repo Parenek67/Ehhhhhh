@@ -67,7 +67,7 @@ class AddWordFragment : Fragment() {
             binding.addWordOrig.text.toString(),
             binding.addWordTranslate.text.toString(),
             binding.addWordTranscription.text.toString(), 0,
-            //LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE)
+            LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE)
             )
             wordsViewModel.insertWord(word)
             wordsViewModel.changeCount(dictName, 1)

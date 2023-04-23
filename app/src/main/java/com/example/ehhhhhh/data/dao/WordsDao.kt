@@ -23,4 +23,7 @@ interface WordsDao {
 
     @Query("SELECT * FROM word WHERE dict_name = :dict_name")
     fun getWordsForTrain(dict_name: String): MutableList<Word>
+
+    @Query("UPDATE word SET rep_date = :rep_date WHERE orig_word = :orig_name AND translate = :translate")
+    suspend fun setRepeatDate(orig_name: String, translate: String, rep_date: String)
 }

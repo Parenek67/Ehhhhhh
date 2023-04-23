@@ -31,4 +31,8 @@ class WordsRepository(val wordsDao: WordsDao, dictName: String) {
     fun getWordsForTrain(dictName: String): MutableList<Word>{
         return wordsDao.getWordsForTrain(dictName)
     }
+
+    suspend fun changeRepeatDate(origName: String, translate: String, repDate: String){
+        wordsDao.setRepeatDate(origName, translate, repDate)
+    }
 }

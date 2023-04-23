@@ -64,6 +64,10 @@ class WordsViewModel(context: Context, val dictName: String): ViewModel() {
             return wordsRep.getWordsForTrain(dictName)
         }
     }
+
+    suspend fun changeRepeatDate(origName: String, translate: String, repDate: String){
+        wordsRep.changeRepeatDate(origName, translate, repDate)
+    }
 }
 
 class WordsViewModelFactory(private val context: Context, val dictName: String) : ViewModelProvider.Factory {
