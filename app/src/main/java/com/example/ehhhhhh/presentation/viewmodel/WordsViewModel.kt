@@ -68,6 +68,14 @@ class WordsViewModel(context: Context, val dictName: String): ViewModel() {
     suspend fun changeRepeatDate(origName: String, translate: String, repDate: String){
         wordsRep.changeRepeatDate(origName, translate, repDate)
     }
+
+    suspend fun plusLevel(origName: String, translate: String){
+        wordsRep.plusLevel(origName, translate)
+    }
+
+    suspend fun minusLevel(origName: String, translate: String){
+        wordsRep.minusLevel(origName, translate)
+    }
 }
 
 class WordsViewModelFactory(private val context: Context, val dictName: String) : ViewModelProvider.Factory {

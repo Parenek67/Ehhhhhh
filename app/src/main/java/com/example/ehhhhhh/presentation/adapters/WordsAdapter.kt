@@ -6,7 +6,9 @@ import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ehhhhhh.R
 import com.example.ehhhhhh.data.model.Dictionary
@@ -29,6 +31,8 @@ class WordsAdapter(var words: MutableList<Word>, val c: Context): RecyclerView.A
         holder.binding.wordOrig.text = words[position].orig_word
         holder.binding.wordTranslate.text = words[position].translate
         holder.binding.wordTranscription.text = words[position].transcription
+        holder.binding.level.text = "Уровень изчуенности: ${words[position].level}"
+        holder.binding.repDate.text = "Дата повторения: ${words[position].rep_date}"
 
         holder.binding.wordVolume.setBackgroundResource(R.drawable.volume_animation)
         val volumeAnim = holder.binding.wordVolume.background as AnimationDrawable
@@ -53,6 +57,18 @@ class WordsAdapter(var words: MutableList<Word>, val c: Context): RecyclerView.A
                         TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID)
                 }
             }
+        }
+
+        holder.itemView.setOnLongClickListener {
+            if(!holder.binding.level.isVisible) {
+                holder.binding.level.visibility = View.VISIBLE
+                holder.binding.repDate.visibility = View.VISIBLE
+            }
+            else{
+                holder.binding.level.visibility = View.GONE
+                holder.binding.repDate.visibility = View.GONE
+            }
+            true
         }
     }
 

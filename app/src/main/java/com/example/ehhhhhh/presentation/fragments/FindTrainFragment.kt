@@ -55,7 +55,7 @@ class FindTrainFragment : Fragment() {
             if (trueAnswers.get(binding.findtrainQuestion.text) != binding.answer1.text){
                 Log.d("maptest", "false")
                 binding.answer1.setTextColor(getResources().getColor(R.color.false_answer))
-                result += "${binding.findtrainQuestion.text} ${trueAnswers.get(binding.findtrainQuestion.text)} 0; "
+                result += "${binding.findtrainQuestion.text} ${trueAnswers.get(binding.findtrainQuestion.text)} -1 ; "
             }
             else {
                 Log.d("maptest", "true")
@@ -73,7 +73,7 @@ class FindTrainFragment : Fragment() {
             if (trueAnswers.get(binding.findtrainQuestion.text) != binding.answer2.text){
                 Log.d("maptest", "false")
                 binding.answer2.setTextColor(getResources().getColor(R.color.false_answer))
-                result += "${binding.findtrainQuestion.text} ${trueAnswers.get(binding.findtrainQuestion.text)} 0; "
+                result += "${binding.findtrainQuestion.text} ${trueAnswers.get(binding.findtrainQuestion.text)} -1; "
             }
             else {
                 Log.d("maptest", "true")
@@ -91,7 +91,7 @@ class FindTrainFragment : Fragment() {
             if (trueAnswers.get(binding.findtrainQuestion.text) != binding.answer3.text){
                 binding.answer3.setTextColor(getResources().getColor(R.color.false_answer))
                 Log.d("maptest", "false")
-                result += "${binding.findtrainQuestion.text} ${trueAnswers.get(binding.findtrainQuestion.text)} 0; "
+                result += "${binding.findtrainQuestion.text} ${trueAnswers.get(binding.findtrainQuestion.text)} -1; "
             }
             else {
                 binding.answer3.setTextColor(getResources().getColor(R.color.true_answer))
@@ -109,7 +109,7 @@ class FindTrainFragment : Fragment() {
             if (trueAnswers.get(binding.findtrainQuestion.text) != binding.answer4.text){
                 Log.d("maptest", "false")
                 binding.answer4.setTextColor(getResources().getColor(R.color.false_answer))
-                result += "${binding.findtrainQuestion.text} ${trueAnswers.get(binding.findtrainQuestion.text)} 0; "
+                result += "${binding.findtrainQuestion.text} ${trueAnswers.get(binding.findtrainQuestion.text)} -1; "
             }
             else {
                 Log.d("maptest", "true")

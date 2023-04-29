@@ -35,4 +35,12 @@ class WordsRepository(val wordsDao: WordsDao, dictName: String) {
     suspend fun changeRepeatDate(origName: String, translate: String, repDate: String){
         wordsDao.setRepeatDate(origName, translate, repDate)
     }
+
+    suspend fun plusLevel(origName: String, translate: String){
+        wordsDao.plusLevel(origName, translate)
+    }
+
+    suspend fun minusLevel(origName: String, translate: String){
+        wordsDao.minusLevel(origName, translate)
+    }
 }

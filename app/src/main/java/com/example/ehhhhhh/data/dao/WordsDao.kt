@@ -26,4 +26,10 @@ interface WordsDao {
 
     @Query("UPDATE word SET rep_date = :rep_date WHERE orig_word = :orig_name AND translate = :translate")
     suspend fun setRepeatDate(orig_name: String, translate: String, rep_date: String)
+
+    @Query("UPDATE word SET level = level + 1 WHERE orig_word = :orig_name AND translate = :translate")
+    suspend fun plusLevel(orig_name: String, translate: String)
+
+    @Query("UPDATE word SET level = level - 1 WHERE orig_word = :orig_name AND translate = :translate AND level>0")
+    suspend fun minusLevel(orig_name: String, translate: String)
 }

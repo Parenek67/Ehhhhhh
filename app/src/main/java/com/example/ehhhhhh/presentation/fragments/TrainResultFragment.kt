@@ -39,11 +39,24 @@ class TrainResultFragment : Fragment() {
         requireArguments().getString("res")!!.split("; ").forEach{
             Log.d("maptest", it)
             val task = it.split(" ")
-            if(task[2] == "1") trueAnswers++ else falseAnswers++
+
+            if(task[2] == "1"){
+                trueAnswers++
+                viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
+                    wordsViewModel.plusLevel(task[0],task[1])
+                }
+            } else {
+                falseAnswers++
+                viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
+                    wordsViewModel.minusLevel(task[0],task[1])
+                }
+            }
+
+
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
                 wordsViewModel.changeRepeatDate(task[0],task[1],
-                    //LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE)
-                    "2023-04-24")
+                    LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE))
+                        //"2023-04-24")
             }
         }
 
