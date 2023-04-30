@@ -9,8 +9,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.ehhhhhh.R
+import com.example.ehhhhhh.data.model.Training
 import com.example.ehhhhhh.databinding.FragmentSelectDictBinding
 import com.example.ehhhhhh.databinding.FragmentTrainResultBinding
+import com.example.ehhhhhh.presentation.viewmodel.TrainViewModelFactory
+import com.example.ehhhhhh.presentation.viewmodel.TrainingViewModel
 import com.example.ehhhhhh.presentation.viewmodel.WordsViewModel
 import com.example.ehhhhhh.presentation.viewmodel.WordsViewModelFactory
 import kotlinx.coroutines.Dispatchers
@@ -25,6 +28,7 @@ class TrainResultFragment : Fragment() {
     var trueAnswers = 0
     var falseAnswers = 0
     private lateinit var wordsViewModel: WordsViewModel
+    private lateinit var trainViewModel: TrainingViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +39,8 @@ class TrainResultFragment : Fragment() {
 
         wordsViewModel = ViewModelProvider(this, WordsViewModelFactory(requireContext(), ""))
             .get(WordsViewModel::class.java)
+        trainViewModel = ViewModelProvider(this, TrainViewModelFactory(requireContext()))
+            .get(TrainingViewModel::class.java)
 
         requireArguments().getString("res")!!.split("; ").forEach{
             Log.d("maptest", it)
@@ -52,12 +58,23 @@ class TrainResultFragment : Fragment() {
                 }
             }
 
-
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
                 wordsViewModel.changeRepeatDate(task[0],task[1],
                     LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE))
                         //"2023-04-24")
             }
+        }
+
+        val train = Training(
+            0,
+            LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
+            requireArguments().getString("train")!!,
+            trueAnswers,
+            falseAnswers
+        )
+
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
+            trainViewModel.insertTrain(train)
         }
 
         binding.resultTrueCount.text = trueAnswers.toString()

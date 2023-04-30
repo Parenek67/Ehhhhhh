@@ -5,13 +5,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.ehhhhhh.data.model.Dictionary
+import com.example.ehhhhhh.data.model.Training
 import com.example.ehhhhhh.data.model.Word
 
-@Database(entities = [Dictionary::class, Word::class], version = 1, exportSchema = false)
+@Database(entities = [Dictionary::class, Word::class, Training::class], version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
 
     abstract fun dictionaryDao(): DictionaryDao
     abstract fun wordsDao(): WordsDao
+    abstract fun trainingDao(): TrainingDao
 
     companion object{
         @Volatile

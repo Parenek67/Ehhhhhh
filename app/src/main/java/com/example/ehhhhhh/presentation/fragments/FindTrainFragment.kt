@@ -29,6 +29,7 @@ class FindTrainFragment : Fragment() {
     val trueAnswers = mutableMapOf<String, String>()
     var result = ""
     val bundle = Bundle()
+    private lateinit var trainType: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +37,7 @@ class FindTrainFragment : Fragment() {
     ): View {
         _binding = FragmentFindTrainBinding.inflate(inflater, container, false)
         val view = binding.root
-        val trainType = requireArguments().getString("train").toString()
+        trainType = requireArguments().getString("train").toString()
         (activity as AppCompatActivity).supportActionBar!!.title=trainType
         val dictName = requireArguments().getString("dictName").toString()
         Log.d("train", dictName)
@@ -169,6 +170,7 @@ class FindTrainFragment : Fragment() {
         }
         else{
             //Log.d("maptest", result.dropLast(2))
+            bundle.putString("train", trainType)
             bundle.putString("res", result.dropLast(2))
             findNavController().navigate(R.id.action_findTrainFragment_to_trainResultFragment, bundle)
         }
