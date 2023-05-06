@@ -2,10 +2,12 @@ package com.example.ehhhhhh.presentation.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.example.ehhhhhh.MainActivity
 import com.example.ehhhhhh.R
 import com.example.ehhhhhh.SignInActivity
@@ -29,10 +31,20 @@ class ProfileFragment : Fragment() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        binding.logout.setOnClickListener{
+        binding.profileLogout.setOnClickListener{
             firebaseAuth.signOut()
             checkUser()
         }
+
+        (activity as AppCompatActivity).supportActionBar!!.hide()
+
+        //val uid = firebaseAuth.currentUser!!.uid
+        //val email = firebaseAuth.currentUser!!.email
+        val date = firebaseAuth.currentUser!!.metadata!!.creationTimestamp
+        Log.d("prof", date.toString())
+
+        binding.profileUid.text = "UID: "+ firebaseAuth.currentUser!!.uid
+        binding.profileLogin.text = firebaseAuth.currentUser!!.email
         return view
     }
 
@@ -46,5 +58,10 @@ class ProfileFragment : Fragment() {
             val intent = Intent(requireContext(), SignInActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        (activity as AppCompatActivity).supportActionBar!!.show()
     }
 }
