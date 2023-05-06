@@ -42,6 +42,8 @@ class FindTrainFragment : Fragment() {
         val dictName = requireArguments().getString("dictName").toString()
         Log.d("train", dictName)
 
+        val language = requireArguments().getString("lang").toString()
+
         wordsViewModel = ViewModelProvider(this, WordsViewModelFactory(requireContext(), dictName))
             .get(WordsViewModel::class.java)
 
@@ -49,7 +51,12 @@ class FindTrainFragment : Fragment() {
             train(it)
         }*/
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
-            train(wordsViewModel.getWordsForTrain())
+            if(language == "russian"){
+                train(wordsViewModel.getWordsForTrain())
+            }
+            else{
+                Log.d("train", "eng")
+            }
         }
 
         binding.answer1.setOnClickListener{
