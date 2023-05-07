@@ -79,5 +79,18 @@
         android:id="@+id/firebaseDicts"
         android:name="com.example.ehhhhhh.presentation.fragments.FirebaseDicts"
         android:label="Серверные словари"
-        tools:layout="@layout/fragment_firebase_dicts" />
+        tools:layout="@layout/fragment_firebase_dicts" >
+        <action
+            android:id="@+id/action_firebaseDicts_to_fireWordsFragment"
+            app:destination="@id/fireWordsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fireWordsFragment"
+        android:name="com.example.ehhhhhh.presentation.fragments.FireWordsFragment"
+        android:label="fragment_fire_words"
+        tools:layout="@layout/fragment_fire_words" >
+        <action
+            android:id="@+id/action_fireWordsFragment_to_dictionariesFragment"
+            app:destination="@id/dictionariesFragment" />
+    </fragment>
 </navigation>

@@ -1,17 +1,22 @@
 package com.example.ehhhhhh.presentation.adapters
 
 import android.annotation.SuppressLint
+import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ehhhhhh.R
 import com.example.ehhhhhh.data.model.FireDictionary
 import com.example.ehhhhhh.databinding.FireItemBinding
 
 class FireDictsAdapter(var dicts: MutableList<FireDictionary>):
     RecyclerView.Adapter<FireDictsAdapter.FireDictsViewHolder>() {
 
+    val bundle = Bundle()
     inner class FireDictsViewHolder(val binding: FireItemBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FireDictsViewHolder {
@@ -31,6 +36,12 @@ class FireDictsAdapter(var dicts: MutableList<FireDictionary>):
                 holder.binding.dictsItemDesc.visibility = View.GONE
             }
             true
+        }
+
+        holder.itemView.setOnClickListener{
+            bundle.putString("dict", "${dicts[position].name};${dicts[position].words};${dicts[position].description};" +
+                    "${dicts[position].date};${dicts[position].isFavourite}")
+            Navigation.findNavController(it).navigate(R.id.action_firebaseDicts_to_fireWordsFragment, bundle)
         }
     }
 
