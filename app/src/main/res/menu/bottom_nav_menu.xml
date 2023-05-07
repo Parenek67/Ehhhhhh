@@ -6,6 +6,10 @@
         android:icon="@drawable/ic_book"
         android:title="Словари"/>
     <item
+        android:id="@+id/firebaseDicts"
+        android:icon="@drawable/ic_devices"
+        android:title="Сеть"/>
+    <item
         android:id="@+id/trainingFragment"
         android:icon="@drawable/ic_lesson"
         android:title="Тренировка"/>

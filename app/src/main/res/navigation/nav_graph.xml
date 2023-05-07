@@ -75,4 +75,9 @@
         android:name="com.example.ehhhhhh.presentation.fragments.TrainResultFragment"
         android:label="fragment_train_result"
         tools:layout="@layout/fragment_train_result" />
+    <fragment
+        android:id="@+id/firebaseDicts"
+        android:name="com.example.ehhhhhh.presentation.fragments.FirebaseDicts"
+        android:label="Серверные словари"
+        tools:layout="@layout/fragment_firebase_dicts" />
 </navigation>
