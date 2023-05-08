@@ -27,6 +27,7 @@
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/profile_image"
+            android:src="@drawable/_135715"
             android:layout_width="150dp"
             android:layout_height="150dp"/>
     </com.google.android.material.card.MaterialCardView>
@@ -107,8 +108,8 @@
 
         <LinearLayout
             android:layout_margin="10dp"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
+            android:layout_width="108dp"
+            android:layout_height="108dp"
             android:orientation="vertical">
 
             <ImageView
@@ -142,8 +143,8 @@
 
         <LinearLayout
             android:layout_margin="10dp"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
+            android:layout_width="108dp"
+            android:layout_height="108dp"
             android:orientation="vertical">
 
             <ImageView
@@ -177,8 +178,8 @@
 
         <LinearLayout
             android:layout_margin="10dp"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
+            android:layout_width="108dp"
+            android:layout_height="108dp"
             android:orientation="vertical">
 
             <ImageView
@@ -212,8 +213,8 @@
 
         <LinearLayout
             android:layout_margin="10dp"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
+            android:layout_width="108dp"
+            android:layout_height="108dp"
             android:orientation="vertical">
 
             <ImageView

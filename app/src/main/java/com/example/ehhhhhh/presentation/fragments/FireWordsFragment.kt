@@ -71,7 +71,7 @@ class FireWordsFragment : Fragment() {
             dictViewModel = ViewModelProvider(this, DictViewModelFactory(requireContext()))
                 .get(DictionaryViewModel::class.java)
             dictViewModel.insertDict(dict)
-            Thread.sleep(5000)
+            Thread.sleep(2000)
             wordsViewModel = ViewModelProvider(this, WordsViewModelFactory(requireContext(), dict.name))
                 .get(WordsViewModel::class.java)
             val w = mutableListOf<Word>()
