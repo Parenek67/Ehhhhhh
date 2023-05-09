@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <RadioGroup
-        android:id="@+id/radio_group"
+        android:id="@+id/radio_group222"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp">
@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/main_purple"
-            android:text="Сортировать по"
+            android:text="Искать по"
             android:textStyle="bold"
             android:textSize="20sp"/>
 
@@ -39,14 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Дате повторения"/>
-
-        <RadioButton
-            android:id="@+id/level"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="Уровню изученности"/>
+            android:text="Транскрипции"/>
     </RadioGroup>
 
 </LinearLayout>

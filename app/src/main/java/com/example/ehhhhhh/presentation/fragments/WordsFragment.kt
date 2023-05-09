@@ -43,6 +43,7 @@ class WordsFragment : Fragment(){
     private lateinit var dictName: String
     private var list = mutableListOf<Word>()
     val bundle = Bundle()
+    var searchType = "Слову на русском"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -89,13 +90,11 @@ class WordsFragment : Fragment(){
         })
 
         binding.filter.setOnClickListener{
-            //adapter.setData(list.sortedBy {it.orig_word}.reversed().toMutableList())
-            /*adapter.setData(list.sortedBy {
-                val sdf = SimpleDateFormat("yyyy-MM-dd")
-                val date = sdf.parse(it.rep_date)
-                date
-            }.reversed().toMutableList())*/
             filterDialog()
+        }
+
+        binding.searchType.setOnClickListener{
+            searchDialog()
         }
 
         return view
@@ -128,16 +127,21 @@ class WordsFragment : Fragment(){
     fun filter(query: String?){
         if(query != null){
             val filterList = mutableListOf<Word>()
-            /*
-            list.sortBy {
-                val sdf = SimpleDateFormat("yyyy-MM-dd")
-                val date = sdf.parse(it.rep_date)
-                date
-            }*/
             for(i in list){
-                if(i.orig_word.toLowerCase(Locale.ROOT).contains(query)){
-                    filterList.add(i)
+                when(searchType){
+                    "Слову на русском" -> if(i.orig_word.toLowerCase(Locale.ROOT).contains(query.lowercase())){
+                        filterList.add(i)
+                    }
+                    "Переводу" -> if(i.translate.toLowerCase(Locale.ROOT).contains(query.lowercase())){
+                        filterList.add(i)
+                    }
+                    "Транскрипции" -> if(i.transcription.toLowerCase(Locale.ROOT).contains(query.lowercase())){
+                        filterList.add(i)
+                    }
                 }
+                /*if(i.orig_word.toLowerCase(Locale.ROOT).contains(query)){
+                    filterList.add(i)
+                }*/
             }
             adapter.setData(filterList)
         }
@@ -166,6 +170,25 @@ class WordsFragment : Fragment(){
             if(radio.text.toString() == "Слову на русском"){
                 adapter.setData(list.sortedBy {it.orig_word.lowercase()}.toMutableList())
             }
+        })
+        dialogBuilder.setNegativeButton("Отмена", DialogInterface.OnClickListener{ dialog, _ ->
+            dialog.cancel()
+        })
+
+        dialogBuilder.create().show()
+    }
+
+    fun searchDialog(){
+        val dialogBuilder = context?.let { AlertDialog.Builder(it) }
+        val view = layoutInflater.inflate(R.layout.search_dialog, null)
+        dialogBuilder!!.setView(view)
+
+        val group = view.findViewById<RadioGroup>(R.id.radio_group222)
+
+        dialogBuilder.setPositiveButton("OK", DialogInterface.OnClickListener{ _, _ ->
+            val radio: RadioButton = view.findViewById(group.checkedRadioButtonId)
+            Log.d("search", radio.text.toString())
+            searchType = radio.text.toString()
         })
         dialogBuilder.setNegativeButton("Отмена", DialogInterface.OnClickListener{ dialog, _ ->
             dialog.cancel()
