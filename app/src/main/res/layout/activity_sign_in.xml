@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_height="wrap_content"
-        android:text="Nazvanie prilozheniya"
+        android:text="Learning English App"
         app:layout_constraintBottom_toTopOf="@id/guideline1"
         android:gravity="center_horizontal"
         android:textSize="30sp"

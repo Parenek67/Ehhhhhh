@@ -73,7 +73,7 @@
     <fragment
         android:id="@+id/trainResultFragment"
         android:name="com.example.ehhhhhh.presentation.fragments.TrainResultFragment"
-        android:label="fragment_train_result"
+        android:label="Результаты"
         tools:layout="@layout/fragment_train_result" />
     <fragment
         android:id="@+id/firebaseDicts"

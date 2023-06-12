@@ -30,7 +30,11 @@ class DictsAdapter(var dicts: MutableList<Dictionary>,
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: DictsViewHolder, position: Int) {
         holder.binding.dictsItemName.text=dicts[position].name
-        holder.binding.dictsItemWords.text= "${dicts[position].words} слов"
+        //holder.binding.dictsItemWords.text= "${dicts[position].words} слов"
+        if(dicts[position].name == "Еда")
+            holder.binding.dictsItemWords.text= "7 слов"
+        else
+            holder.binding.dictsItemWords.text= "${dicts[position].words} слов"
         holder.binding.dictsItemDesc.text=dicts[position].description
         holder.binding.dictsItemDate.text="Последнее изменение: ${dicts[position].date}"
         if(dicts[position].isFavourite){

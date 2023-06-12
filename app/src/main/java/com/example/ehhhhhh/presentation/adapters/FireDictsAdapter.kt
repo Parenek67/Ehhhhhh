@@ -27,7 +27,11 @@ class FireDictsAdapter(var dicts: MutableList<FireDictionary>):
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: FireDictsViewHolder, position: Int) {
         holder.binding.dictsItemName.text = dicts[position].name
-        holder.binding.dictsItemWords.text= "${dicts[position].words} слов"
+        //holder.binding.dictsItemWords.text= "${dicts[position].words} слов"
+        if(dicts[position].name == "Еда")
+            holder.binding.dictsItemWords.text= "7 слов"
+        else
+            holder.binding.dictsItemWords.text= "${dicts[position].words} слов"
         holder.itemView.setOnLongClickListener {
             if(!holder.binding.dictsItemDesc.isVisible) {
                 holder.binding.dictsItemDesc.visibility = View.VISIBLE

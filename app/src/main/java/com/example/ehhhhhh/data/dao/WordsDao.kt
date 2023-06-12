@@ -2,7 +2,6 @@ package com.example.ehhhhhh.data.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.ehhhhhh.data.model.Dictionary
 import com.example.ehhhhhh.data.model.Word
 
 @Dao

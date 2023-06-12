@@ -8,10 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ehhhhhh.R
 import com.example.ehhhhhh.data.model.Training
 import com.example.ehhhhhh.databinding.FragmentSelectDictBinding
 import com.example.ehhhhhh.databinding.FragmentTrainResultBinding
+import com.example.ehhhhhh.presentation.adapters.ErrorsAdapter
 import com.example.ehhhhhh.presentation.viewmodel.TrainViewModelFactory
 import com.example.ehhhhhh.presentation.viewmodel.TrainingViewModel
 import com.example.ehhhhhh.presentation.viewmodel.WordsViewModel
@@ -42,6 +44,9 @@ class TrainResultFragment : Fragment() {
         trainViewModel = ViewModelProvider(this, TrainViewModelFactory(requireContext()))
             .get(TrainingViewModel::class.java)
 
+        val err = requireArguments().getString("err")!!.split(";").toMutableList()
+        binding.rv.adapter = ErrorsAdapter(err)
+        binding.rv.layoutManager = LinearLayoutManager(context)
         requireArguments().getString("res")!!.split("; ").forEach{
             Log.d("maptest", it)
             val task = it.split(" ")

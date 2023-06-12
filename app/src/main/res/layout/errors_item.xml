@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/rectangle"
+    android:layout_margin="2dp">
+
+    <TextView
+        android:id="@+id/error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/rus"
+        app:layout_constraintStart_toEndOf="@id/rus"
+        app:layout_constraintBaseline_toBaselineOf="@id/rus"
+        android:layout_marginStart="6dp"
+        android:text="ошибка"
+        android:textSize="20sp"
+        android:textColor="@color/false_answer"/>
+
+    <TextView
+        android:id="@+id/correct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/error"
+        app:layout_constraintStart_toEndOf="@id/error"
+        android:text="верно"
+        android:layout_marginStart="6dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/rus"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="15dp"
+        android:textSize="20sp"
+        android:textColor="@color/true_answer"/>
+
+    <TextView
+        android:id="@+id/rus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="слово на русском"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginStart="10dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

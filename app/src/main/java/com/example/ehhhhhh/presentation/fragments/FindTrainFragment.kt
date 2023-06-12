@@ -29,6 +29,7 @@ class FindTrainFragment : Fragment() {
     val trueAnswers = mutableMapOf<String, String>()
     var result = ""
     val bundle = Bundle()
+    var errors = ""
     private lateinit var trainType: String
 
     override fun onCreateView(
@@ -64,6 +65,7 @@ class FindTrainFragment : Fragment() {
                 Log.d("maptest", "false")
                 binding.answer1.setTextColor(getResources().getColor(R.color.false_answer))
                 result += "${binding.findtrainQuestion.text} ${trueAnswers.get(binding.findtrainQuestion.text)} -1 ; "
+                errors += "${binding.findtrainQuestion.text} ${binding.answer1.text} ${trueAnswers.get(binding.findtrainQuestion.text)};"
             }
             else {
                 Log.d("maptest", "true")
@@ -82,6 +84,7 @@ class FindTrainFragment : Fragment() {
                 Log.d("maptest", "false")
                 binding.answer2.setTextColor(getResources().getColor(R.color.false_answer))
                 result += "${binding.findtrainQuestion.text} ${trueAnswers.get(binding.findtrainQuestion.text)} -1; "
+                errors += "${binding.findtrainQuestion.text} ${binding.answer1.text};"
             }
             else {
                 Log.d("maptest", "true")
@@ -100,6 +103,7 @@ class FindTrainFragment : Fragment() {
                 binding.answer3.setTextColor(getResources().getColor(R.color.false_answer))
                 Log.d("maptest", "false")
                 result += "${binding.findtrainQuestion.text} ${trueAnswers.get(binding.findtrainQuestion.text)} -1; "
+                errors += "${binding.findtrainQuestion.text} ${binding.answer1.text};"
             }
             else {
                 binding.answer3.setTextColor(getResources().getColor(R.color.true_answer))
@@ -118,6 +122,7 @@ class FindTrainFragment : Fragment() {
                 Log.d("maptest", "false")
                 binding.answer4.setTextColor(getResources().getColor(R.color.false_answer))
                 result += "${binding.findtrainQuestion.text} ${trueAnswers.get(binding.findtrainQuestion.text)} -1; "
+                errors += "${binding.findtrainQuestion.text} ${binding.answer1.text};"
             }
             else {
                 Log.d("maptest", "true")
@@ -179,6 +184,7 @@ class FindTrainFragment : Fragment() {
             //Log.d("maptest", result.dropLast(2))
             bundle.putString("train", trainType)
             bundle.putString("res", result.dropLast(2))
+            bundle.putString("err", errors.dropLast(1))
             findNavController().navigate(R.id.action_findTrainFragment_to_trainResultFragment, bundle)
         }
     }

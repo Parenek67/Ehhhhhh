@@ -32,7 +32,7 @@ class SelectDictAdapter(val c: Context, var list: MutableList<String>): Recycler
             }
             else{
                 selected.add(element)
-                holder.binding.selectedDictItemCardview.setCardBackgroundColor(c.resources.getColor(R.color.teal_200))
+                holder.binding.selectedDictItemCardview.setCardBackgroundColor(c.resources.getColor(R.color.purple_200))
             }
         }
     }

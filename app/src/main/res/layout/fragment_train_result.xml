@@ -67,4 +67,11 @@
         android:layout_marginEnd="10dp"
         android:textStyle="bold"/>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
+        app:layout_constraintTop_toBottomOf="@id/result_falseAnswers"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
